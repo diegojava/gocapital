@@ -1,0 +1,162 @@
+<header class="site-header">
+  <div class="header-shell">
+    <div class="header-row">
+      <a class="brand" href="/">
+        <img class="brand-logo" src="/gocapital_logo.png" alt="GoCapital" />
+      </a>
+
+      <nav id="main-nav" class="main-nav" data-open="false">
+        <ul class="menu-list">
+          <li class="menu-item">
+            <a class="menu-link" href="/">Inicio</a>
+          </li>
+
+          <li class="menu-item">
+            <button class="submenu-toggle" type="button" aria-expanded="false" aria-controls="submenu-servicios">
+              Servicios
+              <span class="submenu-caret" aria-hidden="true">v</span>
+            </button>
+            <ul id="submenu-servicios" class="submenu-list" hidden>
+              <li><a class="submenu-link" href="#">Consultoria</a></li>
+              <li><a class="submenu-link" href="#">Inversion</a></li>
+              <li><a class="submenu-link" href="#">Planeacion</a></li>
+            </ul>
+          </li>
+
+          <li class="menu-item">
+            <button class="submenu-toggle" type="button" aria-expanded="false" aria-controls="submenu-recursos">
+              Recursos
+              <span class="submenu-caret" aria-hidden="true">v</span>
+            </button>
+            <ul id="submenu-recursos" class="submenu-list" hidden>
+              <li><a class="submenu-link" href="#">Blog</a></li>
+              <li><a class="submenu-link" href="#">Guias</a></li>
+              <li><a class="submenu-link" href="#">Casos de exito</a></li>
+            </ul>
+          </li>
+
+          <li class="menu-item">
+            <a class="menu-link" href="#">Contacto</a>
+          </li>
+        </ul>
+      </nav>
+
+      <div class="header-actions">
+        <button class="theme-toggle" type="button" data-theme-toggle aria-pressed="false" aria-label="Cambiar a modo oscuro">
+          <span class="theme-icon theme-icon-sun" aria-hidden="true">
+            <svg viewBox="0 0 24 24" role="img" focusable="false">
+              <circle cx="12" cy="12" r="4"></circle>
+              <path d="M12 2v2.5M12 19.5V22M4.93 4.93l1.77 1.77M17.3 17.3l1.77 1.77M2 12h2.5M19.5 12H22M4.93 19.07l1.77-1.77M17.3 6.7l1.77-1.77"></path>
+            </svg>
+          </span>
+          <span class="theme-icon theme-icon-moon" aria-hidden="true">
+            <svg viewBox="0 0 24 24" role="img" focusable="false">
+              <path d="M20 14.2A8 8 0 1 1 9.8 4a6.5 6.5 0 1 0 10.2 10.2Z"></path>
+            </svg>
+          </span>
+        </button>
+
+        <button
+          class="menu-toggle"
+          type="button"
+          aria-expanded="false"
+          aria-controls="main-nav"
+          data-menu-toggle
+        >
+          <span aria-hidden="true">Menu</span>
+          <span class="sr-only">Abrir menu</span>
+        </button>
+      </div>
+    </div>
+  </div>
+</header>
+
+<script>
+  const siteHeader = document.querySelector('.site-header');
+  const menuToggle = document.querySelector('[data-menu-toggle]');
+  const mainNav = document.getElementById('main-nav');
+  const submenuButtons = document.querySelectorAll('.submenu-toggle');
+  const themeToggle = document.querySelector('[data-theme-toggle]');
+  const themeLabel = document.querySelector('[data-theme-label]');
+  const themeStorageKey = 'gocapital-theme';
+
+  const applyThemeUI = (theme) => {
+    const isDark = theme === 'dark';
+
+    if (themeToggle) {
+      themeToggle.setAttribute('aria-pressed', String(isDark));
+      themeToggle.setAttribute('aria-label', isDark ? 'Cambiar a modo claro' : 'Cambiar a modo oscuro');
+    }
+
+    if (themeLabel) {
+      themeLabel.textContent = isDark ? '' : '';
+    }
+  };
+
+  if (themeToggle) {
+    const activeTheme = document.documentElement.getAttribute('data-theme') === 'dark' ? 'dark' : 'light';
+    applyThemeUI(activeTheme);
+
+    themeToggle.addEventListener('click', () => {
+      const currentTheme = document.documentElement.getAttribute('data-theme') === 'dark' ? 'dark' : 'light';
+      const nextTheme = currentTheme === 'dark' ? 'light' : 'dark';
+
+      document.documentElement.setAttribute('data-theme', nextTheme);
+      applyThemeUI(nextTheme);
+      localStorage.setItem(themeStorageKey, nextTheme);
+    });
+  }
+
+  if (menuToggle && mainNav) {
+    menuToggle.addEventListener('click', () => {
+      const isOpen = menuToggle.getAttribute('aria-expanded') === 'true';
+      menuToggle.setAttribute('aria-expanded', String(!isOpen));
+      mainNav.setAttribute('data-open', String(!isOpen));
+    });
+  }
+
+  const updateHeaderScrollState = () => {
+    if (!siteHeader) return;
+    siteHeader.setAttribute('data-scrolled', window.scrollY > 10 ? 'true' : 'false');
+  };
+
+  updateHeaderScrollState();
+  window.addEventListener('scroll', updateHeaderScrollState, { passive: true });
+
+  const closeAllSubmenus = (exceptButton = null) => {
+    submenuButtons.forEach((otherButton) => {
+      if (otherButton === exceptButton) return;
+
+      const otherControlsId = otherButton.getAttribute('aria-controls');
+      const otherSubmenu = otherControlsId ? document.getElementById(otherControlsId) : null;
+
+      if (!otherSubmenu) return;
+
+      otherButton.setAttribute('aria-expanded', 'false');
+      otherSubmenu.hidden = true;
+    });
+  };
+
+  submenuButtons.forEach((button) => {
+    const controlsId = button.getAttribute('aria-controls');
+    const submenu = controlsId ? document.getElementById(controlsId) : null;
+
+    if (!submenu) return;
+
+    button.addEventListener('click', () => {
+      const isExpanded = button.getAttribute('aria-expanded') === 'true';
+
+      if (isExpanded) {
+        button.setAttribute('aria-expanded', 'false');
+        submenu.hidden = true;
+        return;
+      }
+
+      closeAllSubmenus(button);
+      button.setAttribute('aria-expanded', 'true');
+      submenu.hidden = false;
+    });
+  });
+</script>
+
+

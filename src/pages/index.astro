@@ -1,0 +1,19 @@
+---
+import BaseLayout from "../layouts/BaseLayout.astro";
+import VideoHero from "../components/VideoHero.astro";
+import ServicesSection from "../components/ServicesSection.astro";
+import VideosSection from "../components/VideosSection.astro";
+---
+
+<BaseLayout title="GoCapital">
+  <VideoHero />
+  <ServicesSection />
+  <VideosSection />
+</BaseLayout>
+
+<style>
+  :global(.main-content) {
+    width: 100%;
+    margin: 0;
+  }
+</style>

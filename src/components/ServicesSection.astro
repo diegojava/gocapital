@@ -1,0 +1,184 @@
+---
+const services = [
+  {
+    title: "Estrategia de inversion",
+    description:
+      "Disenamos rutas de crecimiento con foco en rentabilidad, control de riesgo y objetivos de largo plazo.",
+    tone: "tone-a",
+  },
+  {
+    title: "Planeacion financiera",
+    description:
+      "Convertimos metas de negocio en planes accionables con escenarios, liquidez y estructura de capital.",
+    tone: "tone-b",
+  },
+  {
+    title: "Transformacion digital",
+    description:
+      "Integramos tecnologia y automatizacion para acelerar decisiones, optimizar operaciones y escalar.",
+    tone: "tone-c",
+  },
+];
+---
+
+<section class="services" aria-labelledby="services-title">
+  <div class="services-shell">
+    <p class="services-kicker">SERVICIOS</p>
+    <h2 id="services-title">Convirtamos tus oportunidades en resultados medibles</h2>
+
+    <div class="services-grid">
+      {
+        services.map((service) => (
+          <article class={`service-card ${service.tone}`}>
+            <a class="service-link" href="#">
+              <div class="service-art" aria-hidden="true"></div>
+              <h3>{service.title} <span aria-hidden="true">></span></h3>
+              <p>{service.description}</p>
+            </a>
+          </article>
+        ))
+      }
+    </div>
+  </div>
+</section>
+
+<style>
+  .services {
+    background:
+      radial-gradient(1200px 400px at 10% 0%, rgba(27, 58, 87, 0.35), transparent 70%),
+      radial-gradient(900px 320px at 90% 10%, rgba(200, 161, 74, 0.18), transparent 70%),
+      #021a2d;
+    padding: clamp(3rem, 6vw, 6rem) 1rem;
+  }
+
+  .services-shell {
+    width: min(1200px, 100%);
+    margin: 0 auto;
+    color: #f3f8ff;
+  }
+
+  .services-kicker {
+    margin: 0;
+    text-align: center;
+    letter-spacing: 0.12em;
+    font-weight: 700;
+    color: #c8d8ea;
+  }
+
+  .services h2 {
+    margin: 1rem auto 2.2rem;
+    max-width: 18ch;
+    text-align: center;
+    font-size: clamp(1.8rem, 4.2vw, 3.8rem);
+    font-weight: 500;
+    line-height: 1.14;
+    color: #e9f1f8;
+  }
+
+  .services-grid {
+    display: grid;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: 1.2rem;
+  }
+
+  .service-card {
+    border-radius: 0.95rem;
+    overflow: hidden;
+    background: rgba(8, 29, 49, 0.82);
+    border: 1px solid rgba(133, 165, 197, 0.22);
+    transition: border-color 220ms ease, transform 220ms ease, box-shadow 220ms ease, background-color 220ms ease;
+  }
+
+  .service-link {
+    display: block;
+    color: inherit;
+    text-decoration: none;
+    height: 100%;
+  }
+
+  .service-art {
+    height: 220px;
+    background-size: cover;
+    background-position: center;
+    transform: scale(1);
+    transition: transform 320ms ease, filter 220ms ease;
+    filter: saturate(1);
+  }
+
+  .tone-a .service-art {
+    background-image:
+      linear-gradient(130deg, rgba(84, 168, 255, 0.4), rgba(32, 72, 210, 0.7)),
+      radial-gradient(circle at 20% 80%, rgba(255, 196, 146, 0.8), transparent 45%),
+      radial-gradient(circle at 70% 35%, rgba(24, 46, 207, 0.95), transparent 48%);
+  }
+
+  .tone-b .service-art {
+    background-image:
+      linear-gradient(115deg, rgba(77, 128, 255, 0.45), rgba(7, 57, 188, 0.78)),
+      radial-gradient(circle at 65% 22%, rgba(126, 235, 255, 0.72), transparent 40%),
+      radial-gradient(circle at 28% 75%, rgba(19, 44, 213, 0.92), transparent 52%);
+  }
+
+  .tone-c .service-art {
+    background-image:
+      linear-gradient(120deg, rgba(74, 176, 255, 0.35), rgba(7, 37, 155, 0.8)),
+      radial-gradient(circle at 78% 58%, rgba(243, 85, 243, 0.52), transparent 42%),
+      radial-gradient(circle at 18% 24%, rgba(26, 53, 205, 0.92), transparent 56%);
+  }
+
+  .service-card h3 {
+    margin: 1.1rem 1rem 0;
+    font-size: clamp(1.25rem, 2.2vw, 2rem);
+    line-height: 1.2;
+    color: #ffffff;
+  }
+
+  .service-card p {
+    margin: 0.85rem 1rem 1.4rem;
+    color: #c8d8ea;
+    font-size: 1.02rem;
+    line-height: 1.55;
+  }
+
+  .service-card:hover,
+  .service-card:focus-within {
+    border-color: rgba(200, 161, 74, 0.8);
+    background: rgba(13, 37, 60, 0.92);
+    transform: translateY(-6px);
+    box-shadow: 0 16px 36px rgba(0, 0, 0, 0.35), 0 0 0 1px rgba(200, 161, 74, 0.25);
+  }
+
+  .service-card:hover .service-art,
+  .service-card:focus-within .service-art {
+    transform: scale(1.04);
+    filter: saturate(1.2);
+  }
+
+  .service-link:focus-visible {
+    outline: 2px solid #c8a14a;
+    outline-offset: -2px;
+  }
+
+  @media (max-width: 1050px) {
+    .services-grid {
+      grid-template-columns: 1fr;
+      gap: 1rem;
+    }
+
+    .service-art {
+      height: 210px;
+    }
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .service-card,
+    .service-art {
+      transition: none;
+    }
+
+    .service-card:hover,
+    .service-card:focus-within {
+      transform: none;
+    }
+  }
+</style>
