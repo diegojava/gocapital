@@ -14,7 +14,10 @@ interface Props {
 }
 
 const fallbackLocale = DEFAULT_LOCALE;
-const { title = messagesByLocale[fallbackLocale].shared.siteTitle, titleKey = "shared.siteTitle" } = Astro.props;
+const {
+  title = messagesByLocale[fallbackLocale].shared.siteTitle,
+  titleKey = "shared.siteTitle",
+} = Astro.props;
 ---
 
 <html lang={fallbackLocale} data-i18n-title={titleKey}>
@@ -448,8 +451,10 @@ const { title = messagesByLocale[fallbackLocale].shared.siteTitle, titleKey = "s
       }
 
       .main-content {
-        width: min(1100px, 100% - 2rem);
-        margin: 2rem auto;
+        width: 100%;
+        max-width: none;
+        margin: 0;
+        padding: 0;
       }
 
       .main-content > *.reveal-item {

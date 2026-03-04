@@ -36,12 +36,12 @@ const tones = ["tone-a", "tone-b", "tone-c"] as const;
       radial-gradient(1200px 400px at 10% 0%, rgba(27, 58, 87, 0.35), transparent 70%),
       radial-gradient(900px 320px at 90% 10%, rgba(200, 161, 74, 0.18), transparent 70%),
       #021a2d;
-    padding: clamp(3rem, 6vw, 6rem) 1rem;
+    padding: clamp(3rem, 6vw, 6rem) 0;
   }
 
   .services-shell {
-    width: min(1200px, 100%);
-    margin: 0 auto;
+    width: 100%;
+    padding-inline: clamp(1rem, 4vw, 3rem);
     color: #f3f8ff;
   }
 

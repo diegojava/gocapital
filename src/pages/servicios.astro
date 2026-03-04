@@ -5,7 +5,7 @@ import { messagesByLocale } from "../i18n/locales";
 const t = messagesByLocale.es.serviciosPage;
 ---
 
-<BaseLayout title={t.title} titleKey="serviciosPage.title">
+<BaseLayout title={t.title} titleKey="serviciosPage.title" fullBleedMain>
   <section class="hero-media" aria-label={t.hero.ariaLabel} data-i18n-attr="aria-label:serviciosPage.hero.ariaLabel">
     <img
       src="https://images.unsplash.com/photo-1518773553398-650c184e0bb3?auto=format&fit=crop&w=2200&q=80"
@@ -77,11 +77,6 @@ const t = messagesByLocale.es.serviciosPage;
 </BaseLayout>
 
 <style>
-  :global(.main-content) {
-    width: 100%;
-    margin: 0;
-  }
-
   .hero-media {
     position: relative;
     height: clamp(180px, 28vh, 300px);

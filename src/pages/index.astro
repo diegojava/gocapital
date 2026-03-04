@@ -5,15 +5,8 @@ import ServicesSection from "../components/ServicesSection.astro";
 import VideosSection from "../components/VideosSection.astro";
 ---
 
-<BaseLayout title="GoCapital" titleKey="shared.homeTitle">
+<BaseLayout title="GoCapital" titleKey="shared.homeTitle" fullBleedMain>
   <VideoHero />
   <ServicesSection />
   <VideosSection />
 </BaseLayout>
-
-<style>
-  :global(.main-content) {
-    width: 100%;
-    margin: 0;
-  }
-</style>
