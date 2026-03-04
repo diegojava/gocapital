@@ -1,0 +1,36 @@
+<div class="language-switcher" role="group" aria-label="Idioma" data-i18n-attr="aria-label:header.languageLabel">
+  <button class="language-option" type="button" data-locale-option="es" aria-pressed="true">
+    ES
+  </button>
+  <button class="language-option" type="button" data-locale-option="en" aria-pressed="false">
+    EN
+  </button>
+</div>
+
+<script>
+  const localeKey = "gocapital-locale";
+  const options = document.querySelectorAll("[data-locale-option]");
+  const applyActiveState = (locale) => {
+    options.forEach((option) => {
+      option.setAttribute("aria-pressed", String(option.getAttribute("data-locale-option") === locale));
+    });
+  };
+
+  const setLocale = (nextLocale) => {
+    document.cookie = `${localeKey}=${nextLocale}; path=/; max-age=31536000; SameSite=Lax`;
+    localStorage.setItem(localeKey, nextLocale);
+    applyActiveState(nextLocale);
+    window.dispatchEvent(new CustomEvent("gocapital:localechange", { detail: { locale: nextLocale } }));
+  };
+
+  const currentLocale = localStorage.getItem(localeKey) || "es";
+  applyActiveState(currentLocale);
+
+  options.forEach((option) => {
+    option.addEventListener("click", () => {
+      const nextLocale = option.getAttribute("data-locale-option");
+      if (!nextLocale) return;
+      setLocale(nextLocale);
+    });
+  });
+</script>

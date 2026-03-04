@@ -1,39 +1,27 @@
 ---
-const services = [
-  {
-    title: "Estrategia de inversion",
-    description:
-      "Disenamos rutas de crecimiento con foco en rentabilidad, control de riesgo y objetivos de largo plazo.",
-    tone: "tone-a",
-  },
-  {
-    title: "Planeacion financiera",
-    description:
-      "Convertimos metas de negocio en planes accionables con escenarios, liquidez y estructura de capital.",
-    tone: "tone-b",
-  },
-  {
-    title: "Transformacion digital",
-    description:
-      "Integramos tecnologia y automatizacion para acelerar decisiones, optimizar operaciones y escalar.",
-    tone: "tone-c",
-  },
-];
+import { messagesByLocale } from "../i18n/locales";
+
+const t = messagesByLocale.es.services;
+const tones = ["tone-a", "tone-b", "tone-c"] as const;
 ---
 
 <section class="services" aria-labelledby="services-title">
   <div class="services-shell">
-    <p class="services-kicker">SERVICIOS</p>
-    <h2 id="services-title">Convirtamos tus oportunidades en resultados medibles</h2>
+    <p class="services-kicker" data-i18n="services.kicker">{t.kicker}</p>
+    <h2 id="services-title" data-i18n="services.title">{t.title}</h2>
 
     <div class="services-grid">
       {
-        services.map((service) => (
-          <article class={`service-card ${service.tone}`}>
+        t.items.map((service, index) => (
+          <article class={`service-card ${tones[index]}`}>
             <a class="service-link" href="#">
               <div class="service-art" aria-hidden="true"></div>
-              <h3>{service.title} <span aria-hidden="true">></span></h3>
-              <p>{service.description}</p>
+              <h3>
+                <span data-i18n={`services.items.${index}.title`}>{service.title}</span>
+                {" "}
+                <span aria-hidden="true">></span>
+              </h3>
+              <p data-i18n={`services.items.${index}.description`}>{service.description}</p>
             </a>
           </article>
         ))

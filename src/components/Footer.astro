@@ -1,35 +1,52 @@
+---
+import { messagesByLocale } from "../i18n/locales";
+const t = messagesByLocale.es.footer;
+---
+
 <footer class="site-footer">
   <div class="footer-shell">
     <section class="footer-top">
       <div class="footer-brand">
-        <a href="/" class="footer-logo-link" aria-label="GoCapital inicio">
+        <a
+          href="/"
+          class="footer-logo-link"
+          aria-label={t.logoHomeLabel}
+          data-i18n-attr="aria-label:footer.logoHomeLabel"
+        >
           <img src="/gocapital_logo.png" alt="GoCapital" class="footer-logo" />
         </a>
 
-        <nav aria-label="Enlaces principales del footer">
+        <nav aria-label={t.navLabel} data-i18n-attr="aria-label:footer.navLabel">
           <ul class="footer-links">
-            <li><a href="#">Careers</a></li>
-            <li><a href="#">About us</a></li>
-            <li><a href="#">Alumni</a></li>
-            <li><a href="#">Contact us</a></li>
-            <li><a href="#">Global locations</a></li>
+            <li><a href="#" data-i18n="footer.links.careers">{t.links.careers}</a></li>
+            <li><a href="#" data-i18n="footer.links.about">{t.links.about}</a></li>
+            <li><a href="#" data-i18n="footer.links.alumni">{t.links.alumni}</a></li>
+            <li><a href="/contacto" data-i18n="footer.links.contact">{t.links.contact}</a></li>
+            <li><a href="#" data-i18n="footer.links.locations">{t.links.locations}</a></li>
           </ul>
         </nav>
       </div>
 
       <div class="footer-subscribe">
-        <h2>Subscribe</h2>
-        <p>Select topics and stay current with our latest insights</p>
+        <h2 data-i18n="footer.subscribeTitle">{t.subscribeTitle}</h2>
+        <p data-i18n="footer.subscribeCopy">{t.subscribeCopy}</p>
         <form class="subscribe-form" action="#" method="post">
-          <label class="sr-only" for="footer-email">Email address</label>
-          <input id="footer-email" name="email" type="email" placeholder="Email address" required />
-          <button type="submit">Submit</button>
+          <label class="sr-only" for="footer-email" data-i18n="footer.emailLabel">{t.emailLabel}</label>
+          <input
+            id="footer-email"
+            name="email"
+            type="email"
+            placeholder={t.emailPlaceholder}
+            required
+            data-i18n-attr="placeholder:footer.emailPlaceholder"
+          />
+          <button type="submit" data-i18n="footer.submit">{t.submit}</button>
         </form>
       </div>
     </section>
 
     <section class="footer-middle">
-      <ul class="social-list" aria-label="Redes sociales">
+      <ul class="social-list" aria-label={t.socialLabel} data-i18n-attr="aria-label:footer.socialLabel">
         <li><a href="#" aria-label="LinkedIn">in</a></li>
         <li><a href="#" aria-label="X">x</a></li>
         <li><a href="#" aria-label="Facebook">f</a></li>
@@ -38,20 +55,20 @@
       </ul>
 
       <ul class="legal-links">
-        <li><a href="#">Scam warning</a></li>
-        <li><a href="#">FAQ</a></li>
-        <li><a href="#">Privacy policy</a></li>
-        <li><a href="#">Your privacy choices</a></li>
-        <li><a href="#">Cookie preferences</a></li>
-        <li><a href="#">Terms of use</a></li>
-        <li><a href="#">Local language information</a></li>
-        <li><a href="#">Accessibility statement</a></li>
+        <li><a href="#" data-i18n="footer.legalLinks.scam">{t.legalLinks.scam}</a></li>
+        <li><a href="#" data-i18n="footer.legalLinks.faq">{t.legalLinks.faq}</a></li>
+        <li><a href="#" data-i18n="footer.legalLinks.privacy">{t.legalLinks.privacy}</a></li>
+        <li><a href="#" data-i18n="footer.legalLinks.choices">{t.legalLinks.choices}</a></li>
+        <li><a href="#" data-i18n="footer.legalLinks.cookie">{t.legalLinks.cookie}</a></li>
+        <li><a href="#" data-i18n="footer.legalLinks.terms">{t.legalLinks.terms}</a></li>
+        <li><a href="#" data-i18n="footer.legalLinks.language">{t.legalLinks.language}</a></li>
+        <li><a href="#" data-i18n="footer.legalLinks.accessibility">{t.legalLinks.accessibility}</a></li>
       </ul>
     </section>
 
     <section class="footer-bottom">
-      <p>GoCapital Insights - Get our latest thinking on your favorite device.</p>
-      <p>&copy; 2026 GoCapital. All rights reserved.</p>
+      <p data-i18n="footer.insightsCopy">{t.insightsCopy}</p>
+      <p data-i18n="footer.copyright">{t.copyright}</p>
     </section>
   </div>
 </footer>

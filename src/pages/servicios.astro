@@ -1,0 +1,313 @@
+---
+import BaseLayout from "../layouts/BaseLayout.astro";
+import { messagesByLocale } from "../i18n/locales";
+
+const t = messagesByLocale.es.serviciosPage;
+---
+
+<BaseLayout title={t.title} titleKey="serviciosPage.title">
+  <section class="hero-media" aria-label={t.hero.ariaLabel} data-i18n-attr="aria-label:serviciosPage.hero.ariaLabel">
+    <img
+      src="https://images.unsplash.com/photo-1518773553398-650c184e0bb3?auto=format&fit=crop&w=2200&q=80"
+      alt={t.hero.imageAlt}
+      data-i18n-attr="alt:serviciosPage.hero.imageAlt"
+      loading="eager"
+    />
+    <div class="hero-overlay">
+      <p data-i18n="serviciosPage.hero.kicker">{t.hero.kicker}</p>
+      <h1 data-i18n="serviciosPage.hero.headline">{t.hero.headline}</h1>
+    </div>
+  </section>
+
+  <section class="intro-band">
+    <div class="intro-shell">
+      <p data-i18n="serviciosPage.intro">{t.intro}</p>
+    </div>
+  </section>
+
+  <section class="pillars" aria-label={t.pillarsAriaLabel} data-i18n-attr="aria-label:serviciosPage.pillarsAriaLabel">
+    <div class="pillars-grid">
+      {
+        t.pillars.map((pillar, index) => (
+          <article class="pillar" id={pillar.id}>
+            <h2 data-i18n={`serviciosPage.pillars.${index}.title`}>{pillar.title}</h2>
+            <p data-i18n={`serviciosPage.pillars.${index}.description`}>{pillar.description}</p>
+            <a href={`#${pillar.id}`}>
+              <span data-i18n={`serviciosPage.pillars.${index}.cta`}>{pillar.cta}</span>
+              {" "}
+              <span aria-hidden="true">></span>
+            </a>
+          </article>
+        ))
+      }
+    </div>
+  </section>
+
+  <section class="split-section">
+    <div class="split-text">
+      <p class="eyebrow" data-i18n="serviciosPage.work.eyebrow">{t.work.eyebrow}</p>
+      <h2 data-i18n="serviciosPage.work.title">{t.work.title}</h2>
+      <p data-i18n="serviciosPage.work.body">{t.work.body}</p>
+      <ul>
+        {t.work.bullets.map((bullet, index) => <li data-i18n={`serviciosPage.work.bullets.${index}`}>{bullet}</li>)}
+      </ul>
+    </div>
+    <img
+      src="https://images.unsplash.com/photo-1573164713988-8665fc963095?auto=format&fit=crop&w=1800&q=80"
+      alt={t.work.imageAlt}
+      data-i18n-attr="alt:serviciosPage.work.imageAlt"
+      loading="lazy"
+    />
+  </section>
+
+  <section class="split-section split-reverse">
+    <img
+      src="https://images.unsplash.com/photo-1486406146926-c627a92ad1ab?auto=format&fit=crop&w=1800&q=80"
+      alt={t.impact.imageAlt}
+      data-i18n-attr="alt:serviciosPage.impact.imageAlt"
+      loading="lazy"
+    />
+    <div class="split-text">
+      <p class="eyebrow" data-i18n="serviciosPage.impact.eyebrow">{t.impact.eyebrow}</p>
+      <h2 data-i18n="serviciosPage.impact.title">{t.impact.title}</h2>
+      <p data-i18n="serviciosPage.impact.body">{t.impact.body}</p>
+      <a class="primary-link" href="#" data-i18n="serviciosPage.impact.cta">{t.impact.cta}</a>
+    </div>
+  </section>
+</BaseLayout>
+
+<style>
+  :global(.main-content) {
+    width: 100%;
+    margin: 0;
+  }
+
+  .hero-media {
+    position: relative;
+    height: clamp(180px, 28vh, 300px);
+    overflow: hidden;
+  }
+
+  .hero-media img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    display: block;
+    filter: brightness(0.62);
+  }
+
+  .hero-overlay {
+    position: absolute;
+    left: min(8vw, 6rem);
+    right: min(8vw, 6rem);
+    bottom: clamp(0.7rem, 2.2vh, 1.2rem);
+    color: #f5f9ff;
+    z-index: 2;
+  }
+
+  .hero-overlay p {
+    margin: 0;
+    letter-spacing: 0.08em;
+    font-size: 0.82rem;
+    text-transform: uppercase;
+    color: #d6e6f8;
+  }
+
+  .hero-overlay h1 {
+    margin: 0.45rem 0 0;
+    max-width: min(22ch, 820px);
+    font-size: clamp(1.25rem, 2.8vw, 2.35rem);
+    line-height: 1.14;
+    font-weight: 600;
+    text-wrap: balance;
+    text-shadow: 0 2px 12px rgba(0, 0, 0, 0.35);
+  }
+
+  .hero-media::after {
+    content: "";
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(
+      90deg,
+      rgba(4, 19, 36, 0.72) 0%,
+      rgba(4, 19, 36, 0.46) 34%,
+      rgba(4, 19, 36, 0.2) 55%,
+      rgba(4, 19, 36, 0.05) 100%
+    );
+    pointer-events: none;
+  }
+
+  .intro-band {
+    background: #062c63;
+    color: #edf4ff;
+    padding: clamp(2rem, 4vw, 3rem) 1rem;
+  }
+
+  .intro-shell {
+    width: min(1200px, 100%);
+    margin: 0 auto;
+  }
+
+  .intro-shell p {
+    margin: 0;
+    max-width: 72ch;
+    font-size: clamp(1.05rem, 1.7vw, 1.9rem);
+    line-height: 1.55;
+  }
+
+  .pillars {
+    background: #efefef;
+    padding: clamp(2.2rem, 4vw, 3.4rem) 1rem;
+  }
+
+  .pillars-grid {
+    width: min(1200px, 100%);
+    margin: 0 auto;
+    display: grid;
+    grid-template-columns: repeat(4, minmax(0, 1fr));
+    gap: 1.6rem;
+  }
+
+  .pillar h2 {
+    margin: 0 0 0.9rem;
+    font-size: clamp(1.2rem, 1.8vw, 2rem);
+    line-height: 1.2;
+  }
+
+  .pillar p {
+    margin: 0;
+    color: #2f3a47;
+    line-height: 1.55;
+    min-height: 7.2rem;
+  }
+
+  .pillar a {
+    margin-top: 1rem;
+    display: inline-flex;
+    align-items: center;
+    gap: 0.35rem;
+    color: #1f4eff;
+    text-decoration: none;
+    font-weight: 600;
+  }
+
+  .pillar a:hover {
+    gap: 0.55rem;
+  }
+
+  .split-section {
+    background: #efefef;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    align-items: stretch;
+  }
+
+  .split-section img {
+    width: 100%;
+    height: 100%;
+    min-height: 520px;
+    object-fit: cover;
+    display: block;
+  }
+
+  .split-text {
+    padding: clamp(2rem, 5vw, 5rem);
+    color: #121920;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+  }
+
+  .eyebrow {
+    margin: 0;
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+    font-size: 0.78rem;
+    color: #5f6a76;
+  }
+
+  .split-text h2 {
+    margin: 0.75rem 0 1rem;
+    font-size: clamp(2rem, 3.8vw, 4rem);
+    line-height: 1.06;
+    max-width: 16ch;
+  }
+
+  .split-text p {
+    margin: 0;
+    max-width: 56ch;
+    line-height: 1.65;
+    font-size: 1.1rem;
+  }
+
+  .split-text ul {
+    margin: 1rem 0 0;
+    padding-left: 1rem;
+    line-height: 1.75;
+    color: #2f3a47;
+  }
+
+  .primary-link {
+    margin-top: 1.2rem;
+    display: inline-block;
+    text-decoration: none;
+    color: #fff;
+    background: #1b3a57;
+    border: 1px solid #1b3a57;
+    border-radius: 0.5rem;
+    padding: 0.7rem 1.15rem;
+    width: fit-content;
+  }
+
+  .primary-link:hover {
+    background: #21486d;
+  }
+
+  @media (max-width: 1160px) {
+    .pillars-grid {
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+    }
+
+    .pillar p {
+      min-height: 0;
+    }
+  }
+
+  @media (max-width: 900px) {
+    .hero-overlay {
+      left: 1.25rem;
+      right: 1.25rem;
+    }
+
+    .hero-overlay h1 {
+      max-width: 100%;
+      text-wrap: pretty;
+      font-size: clamp(1.1rem, 5.2vw, 1.75rem);
+      line-height: 1.2;
+      margin-top: 0.35rem;
+    }
+
+    .split-section,
+    .split-reverse {
+      grid-template-columns: 1fr;
+    }
+
+    .split-reverse img {
+      order: 0;
+    }
+
+    .split-reverse .split-text {
+      order: 1;
+    }
+
+    .split-section img {
+      min-height: 340px;
+    }
+  }
+
+  @media (max-width: 680px) {
+    .pillars-grid {
+      grid-template-columns: 1fr;
+    }
+  }
+</style>

@@ -1,13 +1,17 @@
 ---
+import { messagesByLocale } from "../i18n/locales";
+
 const videoId = "NyIA4REQYNk";
 const videoUrl = `https://www.youtube.com/embed/${videoId}?autoplay=1&mute=1&controls=0&loop=1&playlist=${videoId}&modestbranding=1&playsinline=1&rel=0`;
+const t = messagesByLocale.es.shared;
 ---
 
-<section class="video-hero" aria-label="Video principal">
+<section class="video-hero" aria-label={t.videoHeroAriaLabel} data-i18n-attr="aria-label:shared.videoHeroAriaLabel">
   <div class="video-shell">
     <iframe
       src={videoUrl}
-      title="Video principal de GoCapital"
+      title={t.videoHeroTitle}
+      data-i18n-attr="title:shared.videoHeroTitle"
       loading="eager"
       allow="autoplay; encrypted-media; picture-in-picture"
       allowfullscreen

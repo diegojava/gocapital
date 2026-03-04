@@ -1,54 +1,34 @@
 ---
-const featuredVideo = {
-  id: "NyIA4REQYNk",
-  date: "Marzo 2, 2026",
-  title: "No te pierdas la estrategia de crecimiento para 2026",
-  description:
-    "Un resumen practico de decisiones de inversion, foco operativo y tecnologia para escalar con disciplina.",
-};
+import { messagesByLocale } from "../i18n/locales";
 
-const videos = [
-  {
-    id: "NyIA4REQYNk",
-    title: "Estrategia de crecimiento para 2026",
-  },
-  {
-    id: "M7lc1UVf-VE",
-    title: "Planeacion financiera para empresas",
-  },
-  {
-    id: "ysz5S6PUM-U",
-    title: "IA aplicada al negocio",
-  },
-];
+const t = messagesByLocale.es.videos;
+const videoIds = ["NyIA4REQYNk", "M7lc1UVf-VE", "ysz5S6PUM-U"];
 ---
 
 <section class="videos" aria-labelledby="videos-title">
   <div class="videos-shell">
     <div class="videos-head">
       <div>
-        <p class="videos-kicker">VIDEOS</p>
-        <h2 id="videos-title">Contenido en YouTube para decisiones mas claras</h2>
-        <p class="videos-copy">
-          En lugar de podcast, aqui mostramos una seleccion de videos con ideas accionables sobre estrategia,
-          inversion y transformacion.
-        </p>
+        <p class="videos-kicker" data-i18n="videos.kicker">{t.kicker}</p>
+        <h2 id="videos-title" data-i18n="videos.title">{t.title}</h2>
+        <p class="videos-copy" data-i18n="videos.copy">{t.copy}</p>
       </div>
-      <a class="videos-cta" href="https://www.youtube.com/" target="_blank" rel="noreferrer">
-        Ver canal >
+      <a class="videos-cta" href="https://www.youtube.com/" target="_blank" rel="noreferrer" data-i18n="videos.cta">
+        {t.cta}
       </a>
     </div>
 
     <article class="featured-video">
       <div class="featured-copy">
-        <p class="featured-date">{featuredVideo.date}</p>
-        <h3>{featuredVideo.title}</h3>
-        <p>{featuredVideo.description}</p>
+        <p class="featured-date" data-i18n="videos.featured.date">{t.featured.date}</p>
+        <h3 data-i18n="videos.featured.title">{t.featured.title}</h3>
+        <p data-i18n="videos.featured.description">{t.featured.description}</p>
       </div>
       <div class="featured-player">
         <iframe
-          src={`https://www.youtube.com/embed/${featuredVideo.id}`}
-          title={featuredVideo.title}
+          src={`https://www.youtube.com/embed/${videoIds[0]}`}
+          title={t.featured.title}
+          data-i18n-attr="title:videos.featured.title"
           loading="lazy"
           allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
           referrerpolicy="strict-origin-when-cross-origin"
@@ -59,17 +39,18 @@ const videos = [
 
     <div class="videos-grid">
       {
-        videos.map((video) => (
+        t.items.map((video, index) => (
           <article class="video-card">
             <iframe
-              src={`https://www.youtube.com/embed/${video.id}`}
+              src={`https://www.youtube.com/embed/${videoIds[index]}`}
               title={video.title}
+              data-i18n-attr={`title:videos.items.${index}.title`}
               loading="lazy"
               allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
               referrerpolicy="strict-origin-when-cross-origin"
               allowfullscreen
             ></iframe>
-            <h3>{video.title}</h3>
+            <h3 data-i18n={`videos.items.${index}.title`}>{video.title}</h3>
           </article>
         ))
       }

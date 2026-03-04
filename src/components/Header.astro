@@ -1,3 +1,10 @@
+---
+import LanguageSwitcher from "./LanguageSwitcher.astro";
+import { messagesByLocale } from "../i18n/locales";
+
+const t = messagesByLocale.es.header;
+---
+
 <header class="site-header">
   <div class="header-shell">
     <div class="header-row">
@@ -8,41 +15,52 @@
       <nav id="main-nav" class="main-nav" data-open="false">
         <ul class="menu-list">
           <li class="menu-item">
-            <a class="menu-link" href="/">Inicio</a>
+            <a class="menu-link" href="/" data-i18n="header.home">{t.home}</a>
           </li>
 
           <li class="menu-item">
             <button class="submenu-toggle" type="button" aria-expanded="false" aria-controls="submenu-servicios">
-              Servicios
+              <span data-i18n="header.services">{t.services}</span>
               <span class="submenu-caret" aria-hidden="true">v</span>
             </button>
             <ul id="submenu-servicios" class="submenu-list" hidden>
-              <li><a class="submenu-link" href="#">Consultoria</a></li>
-              <li><a class="submenu-link" href="#">Inversion</a></li>
-              <li><a class="submenu-link" href="#">Planeacion</a></li>
+              <li><a class="submenu-link" href="/servicios#arquitectura-y-planeacion" data-i18n="header.architecture">{t.architecture}</a></li>
+              <li><a class="submenu-link" href="/servicios#modernizacion-de-plataforma" data-i18n="header.modernization">{t.modernization}</a></li>
+              <li><a class="submenu-link" href="/servicios#transformacion-operativa" data-i18n="header.operations">{t.operations}</a></li>
             </ul>
           </li>
 
           <li class="menu-item">
             <button class="submenu-toggle" type="button" aria-expanded="false" aria-controls="submenu-recursos">
-              Recursos
+              <span data-i18n="header.resources">{t.resources}</span>
               <span class="submenu-caret" aria-hidden="true">v</span>
             </button>
             <ul id="submenu-recursos" class="submenu-list" hidden>
-              <li><a class="submenu-link" href="#">Blog</a></li>
-              <li><a class="submenu-link" href="#">Guias</a></li>
-              <li><a class="submenu-link" href="#">Casos de exito</a></li>
+              <li><a class="submenu-link" href="#" data-i18n="header.blog">{t.blog}</a></li>
+              <li><a class="submenu-link" href="#" data-i18n="header.guides">{t.guides}</a></li>
+              <li><a class="submenu-link" href="#" data-i18n="header.caseStudies">{t.caseStudies}</a></li>
             </ul>
           </li>
 
           <li class="menu-item">
-            <a class="menu-link" href="#">Contacto</a>
+            <a class="menu-link" href="/contacto" data-i18n="header.contact">{t.contact}</a>
           </li>
         </ul>
       </nav>
 
       <div class="header-actions">
-        <button class="theme-toggle" type="button" data-theme-toggle aria-pressed="false" aria-label="Cambiar a modo oscuro">
+        <LanguageSwitcher />
+
+        <button
+          class="theme-toggle"
+          type="button"
+          data-theme-toggle
+          aria-pressed="false"
+          aria-label={t.themeToDark}
+          data-theme-label-dark={t.themeToDark}
+          data-theme-label-light={t.themeToLight}
+          data-i18n-attr="aria-label:header.themeToDark;data-theme-label-dark:header.themeToDark;data-theme-label-light:header.themeToLight"
+        >
           <span class="theme-icon theme-icon-sun" aria-hidden="true">
             <svg viewBox="0 0 24 24" role="img" focusable="false">
               <circle cx="12" cy="12" r="4"></circle>
@@ -63,8 +81,8 @@
           aria-controls="main-nav"
           data-menu-toggle
         >
-          <span aria-hidden="true">Menu</span>
-          <span class="sr-only">Abrir menu</span>
+          <span aria-hidden="true" data-i18n="header.menuLabel">{t.menuLabel}</span>
+          <span class="sr-only" data-i18n="header.menuOpen">{t.menuOpen}</span>
         </button>
       </div>
     </div>
@@ -79,13 +97,15 @@
   const themeToggle = document.querySelector('[data-theme-toggle]');
   const themeLabel = document.querySelector('[data-theme-label]');
   const themeStorageKey = 'gocapital-theme';
+  const themeLabelDark = themeToggle?.getAttribute('data-theme-label-dark') ?? 'Switch to dark mode';
+  const themeLabelLight = themeToggle?.getAttribute('data-theme-label-light') ?? 'Switch to light mode';
 
   const applyThemeUI = (theme) => {
     const isDark = theme === 'dark';
 
     if (themeToggle) {
       themeToggle.setAttribute('aria-pressed', String(isDark));
-      themeToggle.setAttribute('aria-label', isDark ? 'Cambiar a modo claro' : 'Cambiar a modo oscuro');
+      themeToggle.setAttribute('aria-label', isDark ? themeLabelLight : themeLabelDark);
     }
 
     if (themeLabel) {
@@ -104,6 +124,11 @@
       document.documentElement.setAttribute('data-theme', nextTheme);
       applyThemeUI(nextTheme);
       localStorage.setItem(themeStorageKey, nextTheme);
+    });
+
+    window.addEventListener('gocapital:localechange', () => {
+      const currentTheme = document.documentElement.getAttribute('data-theme') === 'dark' ? 'dark' : 'light';
+      applyThemeUI(currentTheme);
     });
   }
 
